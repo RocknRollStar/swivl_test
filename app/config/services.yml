@@ -1,5 +1,5 @@
 services:
     app.news_repository:
-        class:     Doctrine\ORM\EntityRepository
+        class:     AcmeNewsBundle\Repository\NewsRepository
         factory:   ['@doctrine.orm.entity_manager', getRepository]
         arguments: [AcmeNewsBundle\Entity\News]
