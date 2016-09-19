@@ -24,6 +24,9 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
         $this->loadNews($manager);
     }
 
+    /**
+     * @param ObjectManager $manager
+     */
     private function loadNews(ObjectManager $manager)
     {
         foreach (range(1, 30) as $i) {
@@ -48,6 +51,9 @@ class LoadFixtures implements FixtureInterface, ContainerAwareInterface
         $this->container = $container;
     }
 
+    /**
+     * @return string
+     */
     private function getPostContent()
     {
         return <<<MARKDOWN
@@ -88,6 +94,9 @@ tincidunt, faucibus nisl in, aliquet libero.
 MARKDOWN;
     }
 
+    /**
+     * @return array
+     */
     private function getPhrases()
     {
         return [
@@ -109,6 +118,9 @@ MARKDOWN;
         ];
     }
 
+    /**
+     * @return mixed
+     */
     private function getRandomPostTitle()
     {
         $titles = $this->getPhrases();

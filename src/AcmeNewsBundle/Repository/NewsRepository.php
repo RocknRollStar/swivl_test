@@ -6,15 +6,21 @@ use Doctrine\ORM\EntityRepository;
 
 class NewsRepository extends EntityRepository
 {
+    /**
+     * @return \Doctrine\ORM\Query
+     */
     public function getAllPublishedNews()
     {
         return $this->createQueryBuilder('n')
             ->select(['n'])
             ->where('n.published = 1')
-            ->getQuery()
-            ->getResult();
+            ->getQuery();
     }
 
+    /**
+     * @param int $count
+     * @return array
+     */
     public function getRandomEntities($count = 10)
     {
         return  $this->createQueryBuilder('n')

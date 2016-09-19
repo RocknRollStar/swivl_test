@@ -2,7 +2,8 @@ acme_news:
     resource: "@AcmeNewsBundle/Controller/NewsController.php"
     type:     annotation
 
-app:
-    resource: "@AcmeNewsBundle/Controller/DefaultController.php"
-    prefix:   /
-    type:     annotation
+homepage:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    :default:index.html.twig

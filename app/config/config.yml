@@ -97,7 +97,7 @@ doctrine:
         auto_mapping: true
         dql:
             numeric_functions:
-                Rand: AcmeNewsBundle\DQL\RandFunction
+                Rand: AcmeNewsBundle\DQL\Extensions\RandFunction
 
 # Swiftmailer Configuration
 swiftmailer:
@@ -108,7 +108,7 @@ swiftmailer:
     spool:     { type: memory }
 
 knp_paginator:
-    page_range: 4
+    page_range: 5
     default_options:
         page_name: page
         sort_field_name: sort

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class NewsController extends Controller
 {
-    const PER_PAGE = 4;
+    const PER_PAGE = 5;
 
     /**
      * @param Request $request
@@ -20,12 +20,12 @@ class NewsController extends Controller
      */
     public function indexAction(Request $request, $_format)
     {
-        $page = max(intval($request->query->get('page', 1)), 1);
+        $page = $request->query->getInt('page', 1);
         //TODO Здесь нарушается принцип единственной обязанности, хотя в рамках этого прилоения, не критично.
         $list = $this
             ->getDoctrine()
             ->getManager()
-            ->getRepository('AcmeNewsBundle:News')
+            ->getRepository(News::class)
             ->getAllPublishedNews();
 
         $pagination = $this->get('knp_paginator')->paginate(
@@ -52,10 +52,10 @@ class NewsController extends Controller
             ->getRepository('AcmeNewsBundle:News')
             ->getRandomEntities();
         
-        return $this->render('default/show.html.twig', array(
+        return $this->render('default/show.html.twig',[
             'news' => $news,
             'list' => $list,
-        ));
+        ]);
     }
 
 }

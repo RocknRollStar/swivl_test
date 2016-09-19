@@ -1,5 +1,5 @@
 <?php
-namespace AcmeNewsBundle\DQL;
+namespace AcmeNewsBundle\DQL\Extensions;
 
 use Doctrine\ORM\Query\Lexer;
 use Doctrine\ORM\Query\Parser;
@@ -8,6 +8,9 @@ use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 
 class RandFunction extends FunctionNode
 {
+    /**
+     * @param Parser $parser
+     */
     public function parse(Parser $parser)
     {
         $parser->match(Lexer::T_IDENTIFIER);
@@ -15,6 +18,10 @@ class RandFunction extends FunctionNode
         $parser->match(Lexer::T_CLOSE_PARENTHESIS);
     }
 
+    /**
+     * @param SqlWalker $sqlWalker
+     * @return string
+     */
     public function getSql(SqlWalker $sqlWalker)
     {
         return 'RAND()';
