@@ -21,13 +21,7 @@ class NewsController extends Controller
     public function indexAction(Request $request, $_format)
     {
         $page = $request->query->getInt('page', 1);
-        //TODO Здесь нарушается принцип единственной обязанности, хотя в рамках этого прилоения, не критично.
-        $list = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository(News::class)
-            ->getAllPublishedNews();
-
+        $list = $this->get('app.news_repository')->getAllPublishedNews();
         $pagination = $this->get('knp_paginator')->paginate(
             $list,
             $page,
@@ -41,17 +35,14 @@ class NewsController extends Controller
     }
 
     /**
+     * @param News $news
+     * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/news/{id}", name="news_show")
      * @Method("GET")
      */
     public function showAction(News $news)
     {
-        $list = $this
-            ->getDoctrine()
-            ->getManager()
-            ->getRepository('AcmeNewsBundle:News')
-            ->getRandomEntities();
-        
+        $list = $this->get('app.news_repository')->getRandomEntities();
         return $this->render('default/show.html.twig',[
             'news' => $news,
             'list' => $list,
