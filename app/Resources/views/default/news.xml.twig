@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<list>
+    {% if list %}
+        {% for item in pagination %}
+            <item id="{{ item.id }}" date="{{ item.date.date }}">
+                <announce>
+                    {{ item.title }}
+                </announce>
+                <description>
+                    {{ item.description }}
+                </description>
+            </item>
+        {% endfor %}
+    {% endif %}
+</list>
